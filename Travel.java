@@ -2,7 +2,7 @@ package com.bus;
 
 import java.util.*;
 
-public class BusTravel {
+public class Travel {
 	private Scanner destination = new Scanner(System.in);
 	
 	private int passengers;
@@ -16,9 +16,7 @@ public class BusTravel {
 	private double totalPrice;
 	
 	private final void passengersOnBoard() {
-		
 		while (true) {
-			
 			try {
 				busticket();
 				break;
@@ -29,67 +27,63 @@ public class BusTravel {
 	}
 	
 	private final void showSelection() {
-		System.out.println("\n**   DESTINATION    **1.)Tuticorin** \t **2.)Madurai** \t**3.)Nagercoil** \t**4.)Tenkasi**");
+		System.out.println("\n   DESTINATION    1.)Tuticorin \t 2.)Madurai \t 3.)Nagercoil \t 4.)Tenkasi");
 		System.out.print("Select A Destination : \t\t ");
 		booking = destination.nextInt();
 		
-		setValidation();
+		check();
 	}
 	
-	private final void setValidation() {
-		
+	private final void check() {
 		if ((booking >= maximumDestinationLimit ) || (booking < minimumDestinationLimit)) {
-			throw new IncorrectDetailsException("Invalid Entry So Kindly Re-try..");
+			throw new IncorrectDetailsException("Invalid Entry So Kindly Retry..");
 		}
 	}
 	
-	private final void passengersDetails() {
+	private final void passengerDetails() {
 		System.out.print( " Enter a passengersDetails :  \t");
 		passengers = destination.nextInt();
 		
-		showPassengers();
+		validatePassenger();
 	}
 	
-	private void showPassengers() {
-		
+	private final void validatePassenger() {
 		if (passengers < minimumPassengerLimit) {
-			throw new IncorrectDetailsException("Invalid Transacation So Kindly Re-try..");
+			throw new IncorrectDetailsException("Invalid Transacation So Kindly Retry..");
 		}
 	}
 	
-	private void baseTicketAmount() {
+	private final void ticketAmount() {
 		System.out.print( " Enter a Base TicketPrice : \t " );
 		baseTicketPrice = destination.nextDouble();
-		
 	}
 	
-	private void totalTicketAmount() {
+	private final void showPayment() {
 		totalPrice = passengers * baseTicketPrice;
 		
 		System.out.println( " Total Price of the Ticket : \t " + totalPrice );
 	}
 	
-	private void paymentDetails() {
+	private final void payment() {
 		System.out.print( " Passenger Amount Paid : \t " );
 		amountPaid = destination.nextDouble();
 	
-		paymentValidation();
+		validatePayment();
 	}
 	
-	private void paymentValidation() {
-		
+	private final void validatePayment() {
 		if (amountPaid < totalPrice) {
-			throw new IncorrectDetailsException("Invalid Transacation So Kindly Re-try..\n");
+			throw new IncorrectDetailsException("Invalid Transacation So Kindly Retry..\n");
 		}
 	}
 	
-	private void billing() {
+	private final void billing() {
 		balance = amountPaid - totalPrice;
 		
 		System.out.println( " Passenger Balance Amount: \t " + balance );
 	}
 	
-	private void busticket() throws RuntimeException {
+	private final void busticket() throws RuntimeException {
 		showSelection();
 	
 		switch (booking) {
@@ -108,16 +102,17 @@ public class BusTravel {
 		default:
 			System.out.println("Thank YOu");
 		}
-		passengersDetails();
-		baseTicketAmount();
-		totalTicketAmount();
-		paymentDetails();
+		
+		passengerDetails();
+		ticketAmount();
+		showPayment();
+		payment();
 		billing();
 	}
 	
 	public static void main(String[] args) {
-		BusTravel transport = new BusTravel();
+		Travel bus = new Travel();
 		
-		transport.passengersOnBoard();
+		bus.passengersOnBoard();
 	}
 }
