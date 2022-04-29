@@ -15,7 +15,7 @@ public class Travel {
 	private int booking;
 	private double totalPrice;
 	
-	private final void passengersOnBoard() {
+	private final void checkPassenger() {
 		while (true) {
 			try {
 				busticket();
@@ -31,10 +31,10 @@ public class Travel {
 		System.out.print("Select A Destination : \t\t ");
 		booking = destination.nextInt();
 		
-		check();
+		checkSelection();
 	}
 	
-	private final void check() {
+	private final void checkSelection() {
 		if ((booking >= maximumDestinationLimit ) || (booking < minimumDestinationLimit)) {
 			throw new IncorrectDetailsException("Invalid Entry So Kindly Retry..");
 		}
@@ -113,6 +113,6 @@ public class Travel {
 	public static void main(String[] args) {
 		Travel bus = new Travel();
 		
-		bus.passengersOnBoard();
+		bus.checkPassenger();
 	}
 }
