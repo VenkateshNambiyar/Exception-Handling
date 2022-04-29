@@ -3,7 +3,7 @@ package com.bus;
 import java.util.*;
 
 public class Travel {
-	private Scanner scanner = new Scanner(System.in);
+	private final Scanner scanner = new Scanner(System.in);
 	
 	private int passengers;
 	private double amountPaid;
